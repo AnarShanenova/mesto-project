@@ -1,0 +1,20 @@
+.card__button {
+  background-image: url(../../../images/like.svg);
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition-property: opacity, background-image;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+.card__button:hover {
+  opacity: 0.5;
+}
+.card__button:active {
+  background-image: url(../../../images/like_active.svg);
+}

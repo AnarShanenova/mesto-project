@@ -1,0 +1,29 @@
+.page {
+  background-color: #000;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  min-width: 320px;
+  padding-top: 45px;
+  padding-bottom: 60px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+@media screen and (max-width: 800px) {
+  .page {
+    padding-top: 40px;
+    padding-bottom: 50px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .page {
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}

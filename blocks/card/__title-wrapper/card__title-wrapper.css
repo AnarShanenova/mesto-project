@@ -1,0 +1,8 @@
+.card__title-wrapper {
+  background-color: #fff;
+  color: #000;
+  padding: 25px 20px 26px 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
