@@ -12,4 +12,4 @@
 * Flexbox
 * Figma
 
-[Посмотреть проект](https://anarshanenova.github.io/mesto-project/index.html) 
+[Посмотреть проект](https://anarshanenova.github.io/mesto-project/) 
