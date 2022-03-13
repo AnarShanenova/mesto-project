@@ -2,3 +2,8 @@
   display: flex;
   align-items: baseline;
 }
+@media screen and (max-width: 667px) {
+  .profile__row {
+    justify-content: center;
+  }
+}

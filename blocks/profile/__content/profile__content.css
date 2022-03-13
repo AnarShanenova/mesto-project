@@ -8,7 +8,7 @@
     margin-right: 0;
   }
 }
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 667px) {
   .profile__content {
     justify-content: center;
     align-items: center;

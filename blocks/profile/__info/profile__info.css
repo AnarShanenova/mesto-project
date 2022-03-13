@@ -4,8 +4,19 @@
   max-width: 450px;
   margin-top: 22px;
 }
+@media screen and (max-width: 867px) {
+  .profile__info {
+    max-width: 400px;
+  }
+}
+@media screen and (max-width: 811px) {
+  .profile__info {
+    max-width: 350px;
+  }
+}
 @media screen and (max-width: 520px) {
   .profile__info {
     margin-top: 26px;
+    width: 100%;
   }
 }

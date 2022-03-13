@@ -13,83 +13,122 @@
         <img class="header__logo" src="./images/logo.svg" alt="Mesto Russia" />
       </div>
     </header>
-    <section class="profile">
-      <div class="profile__container container">
-        <div class="profile__content">
-          <img
-            class="profile__avatar"
-            src="./images/profile_pic.jpg"
-            alt="Profile Avatar"
-          />
-          <div class="profile__info">
-            <div class="profile__row">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__name-edit-button opacity"></button>
+    <main class="content">
+      <section class="profile">
+        <div class="profile__container container">
+          <div class="profile__content">
+            <img
+              class="profile__avatar"
+              src="./images/profile_pic.jpg"
+              alt="Profile Avatar"
+            />
+            <div class="profile__info">
+              <div class="profile__row">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button
+                  class="profile__name-edit-button opacity"
+                  aria-label="Редактировать профиль"
+                  type="button"
+                ></button>
+              </div>
+              <h2 class="profile__description">Исследователь океана</h2>
             </div>
-            <h2 class="profile__description">Исследователь океана</h2>
           </div>
+          <button
+            class="profile__add-button opacity"
+            aria-label="Добавить фото"
+            type="button"
+          ></button>
         </div>
-        <button class="profile__add-button opacity"></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__container container">
+          <li class="card">
+            <img class="card__image" src="./images/dombai.jpg" alt="Dombai" />
+            <div class="card__title-wrapper">
+              <h2 class="card__title">Домбай</h2>
+              <button
+                class="card__button"
+                aria-label="Нравится"
+                type="button"
+              ></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус" />
+            <div class="card__title-wrapper">
+              <h2 class="card__title">Эльбрус</h2>
+              <button
+                class="card__button"
+                aria-label="Нравится"
+                type="button"
+              ></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/benci.jpg" alt="Бенцы" />
+            <div class="card__title-wrapper">
+              <h2 class="card__title">Бенцы</h2>
+              <button
+                class="card__button"
+                aria-label="Нравится"
+                type="button"
+              ></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/karachaevsk.jpg"
+              alt="Карачаевск"
+            />
+            <div class="card__title-wrapper">
+              <h2 class="card__title">Карачаевск</h2>
+              <button
+                class="card__button"
+                aria-label="Нравится"
+                type="button"
+              ></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/nikola_lenivets.jpg"
+              alt="Никола-Ленивец"
+            />
+            <div class="card__title-wrapper">
+              <h2 class="card__title">Деревня Никола-Ленивец</h2>
+              <button
+                class="card__button"
+                aria-label="Нравится"
+                type="button"
+              ></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/viritsa.jpg" alt="Вырица" />
+            <div class="card__title-wrapper">
+              <h2 class="card__title">Вырица</h2>
+              <button
+                class="card__button"
+                aria-label="Нравится"
+                type="button"
+              ></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__container container">
+        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </div>
-    </section>
-    <section class="elements">
-      <ul class="elements__container container">
-        <li class="card">
-          <img class="card__image" src="./images/dombai.jpg" alt="Dombai" />
-          <div class="card__title-wrapper">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус" />
-          <div class="card__title-wrapper">
-            <h2 class="card__title">Эльбрус</h2>
-            <button class="card__button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__image" src="./images/benci.jpg" alt="Бенцы" />
-          <div class="card__title-wrapper">
-            <h2 class="card__title">Бенцы</h2>
-            <button class="card__button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img
-            class="card__image"
-            src="./images/karachaevsk.jpg"
-            alt="Карачаевск"
-          />
-          <div class="card__title-wrapper">
-            <h2 class="card__title">Карачаевск</h2>
-            <button class="card__button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img
-            class="card__image"
-            src="./images/nikola_lenivets.jpg"
-            alt="Никола-Ленивец"
-          />
-          <div class="card__title-wrapper">
-            <h2 class="card__title">Деревня Никола-Ленивец</h2>
-            <button class="card__button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__image" src="./images/viritsa.jpg" alt="Вырица" />
-          <div class="card__title-wrapper">
-            <h2 class="card__title">Вырица</h2>
-            <button class="card__button"></button>
-          </div>
-        </li>
-      </ul>
-    </section>
+    </footer>
     <section class="popup popup_opened">
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="popup__form">
+        <form class="popup__form" name="edit-form">
           <input
             class="popup__input"
             type="text"
@@ -108,15 +147,16 @@
             maxlength="150"
             placeholder="О себе"
           />
-          <button class="popup__button" type="submit">Сохранить</button>
+          <button class="popup__button" type="submit" aria-label="Сохранить">
+            Сохранить
+          </button>
         </form>
-        <button class="popup__close-btn opacity"></button>
+        <button
+          class="popup__close-btn opacity"
+          aria-label="Закрыть"
+          type="button"
+        ></button>
       </div>
     </section>
-    <footer class="footer">
-      <div class="footer__container container">
-        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-      </div>
-    </footer>
   </body>
 </html>
