@@ -43,80 +43,7 @@
       </section>
       <section class="elements">
         <ul class="elements__container container">
-          <li class="card">
-            <img class="card__image" src="./images/dombai.jpg" alt="Dombai" />
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Домбай</h2>
-              <button
-                class="card__button"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/elbrus.jpg" alt="Эльбрус" />
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Эльбрус</h2>
-              <button
-                class="card__button"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/benci.jpg" alt="Бенцы" />
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Бенцы</h2>
-              <button
-                class="card__button"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              class="card__image"
-              src="./images/karachaevsk.jpg"
-              alt="Карачаевск"
-            />
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Карачаевск</h2>
-              <button
-                class="card__button"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="card">
-            <img
-              class="card__image"
-              src="./images/nikola_lenivets.jpg"
-              alt="Никола-Ленивец"
-            />
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Деревня Никола-Ленивец</h2>
-              <button
-                class="card__button"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/viritsa.jpg" alt="Вырица" />
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Вырица</h2>
-              <button
-                class="card__button"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
+       
         </ul>
       </section>
     </main>
@@ -125,10 +52,10 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </div>
     </footer>
-    <section class="popup popup_opened">
+    <section class="popup" id="nameEditPopup">
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="popup__form" name="edit-form">
+        <form class="popup__form" name="editForm" id="editForm">
           <input
             class="popup__input"
             type="text"
@@ -137,6 +64,7 @@
             minlength="3"
             maxlength="45"
             placeholder="Имя"
+            id="username"
           />
           <input
             class="popup__input"
@@ -146,8 +74,9 @@
             minlength="5"
             maxlength="150"
             placeholder="О себе"
+            id="userJob"
           />
-          <button class="popup__button" type="submit" aria-label="Сохранить">
+          <button id='nameSubmitBtn' class="popup__button" type="submit" aria-label="Сохранить">
             Сохранить
           </button>
         </form>
@@ -158,5 +87,68 @@
         ></button>
       </div>
     </section>
+    <section class="popup" id="addPhotoPopup">
+      <div class="popup__container">
+        <h3 class="popup__title">Новое место</h3>
+        <form class="popup__form" name="edit-form" id="photoAddForm">
+          <input
+            class="popup__input"
+            type="text"
+            name="photoname"
+            value=""
+            minlength="1"
+            maxlength="45"
+            placeholder="Название"
+            id="photoTitle"
+          />
+          <input
+            class="popup__input"
+            type="url"
+            name="photolink"
+            value=""
+            minlength="4"          
+            placeholder="Ссылка на картинку"
+            id="photoLink"
+          />
+          <button id='photoSubmitBtn' class="popup__button" type="submit" aria-label="Создать">
+            Создать
+          </button>
+        </form>
+        <button
+          class="popup__close-btn opacity"
+          aria-label="Закрыть"
+          type="button"
+        ></button>
+      </div>
+    </section>
+    <section class="popup popup_big-image" id="bigImgPopup">
+      <div class="popup__wrapper">
+        <button
+        class="popup__close-btn opacity"
+        aria-label="Закрыть"
+        type="button"
+      ></button>
+      <figure class="popup__figure">
+        <img class="popup__image" src="./images/gornialtay.jpg">        
+        <figcaption class="popup__image-name">Горный Алтай</figcaption>
+      </figure>
+      
+      </div>
+    </section>
+    <template class="card-template">
+      <li class="card">
+        <img class="card__image">
+        <div class="card__title-wrapper">
+          <h2 class="card__title"></h2>
+          <button
+            class="card__button-like"
+            aria-label="Нравится"
+            type="button"
+          ></button>
+        </div>
+        <button class="card__button-delete opacity" aria-label="Удалить" type="button"></button>
+      </li>
+    </template>
+    <script src="/script.js"></script>
   </body>
 </html>

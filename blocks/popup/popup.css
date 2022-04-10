@@ -4,7 +4,13 @@
   min-height: 100%;
   position: fixed;
   top: 0;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition-property: visibility, opacity;
+  transition-duration: 0.4s, 0.4s;
+  transition-timing-function: ease, ease;
 }
