@@ -9,7 +9,7 @@
   text-align: center;
   padding: 7px;
   margin-top: 18px;
-  transition: opacity 0.4s ease;
+  transition: all 0.4s ease;
   cursor: pointer;
 }
 .popup__button:hover {

@@ -11,6 +11,7 @@
 4. Открытие фотографий в полный размер
 5. Возможность ставить отметки "Нравится"
 6. Возможность удалять карточки
+7. live-валидация
 
 ## Используемые технологии
 * HTML
@@ -19,8 +20,9 @@
 * Grid Layout
 * Flexbox
 * Figma
-* JS
+* JavaScript
 * Git
+* Webpack
 
 
 [Посмотреть проект](https://anarshanenova.github.io/mesto-project/)

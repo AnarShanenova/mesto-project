@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
     <header class="header">
       <div class="header__container container container_size_large">
-        <img class="header__logo" src="./images/logo.svg" alt="Mesto Russia" />
+        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Mesto Russia" />
       </div>
     </header>
     <main class="content">
@@ -19,7 +18,7 @@
           <div class="profile__content">
             <img
               class="profile__avatar"
-              src="./images/profile_pic.jpg"
+              src="<%=require('./images/profile_pic.jpg')%>"
               alt="Profile Avatar"
             />
             <div class="profile__info">
@@ -49,33 +48,37 @@
     </main>
     <footer class="footer">
       <div class="footer__container container">
-        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
       </div>
     </footer>
     <section class="popup" id="nameEditPopup">
       <div class="popup__container">
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="popup__form" name="editForm" id="editForm">
-          <input
+        <h3 class="popup__title">Редактировать профиль</h3>       
+        <form class="popup__form" name="nameEditForm" id="nameEditForm" novalidate>
+           <input
             class="popup__input"
             type="text"
             name="username"
             value="Жак-Ив Кусто"
-            minlength="3"
-            maxlength="45"
+            minlength="2"
+            maxlength="40"
             placeholder="Имя"
             id="usernameInput"
+            required
           />
+          <span class="popup__input-error usernameInput-error"></span>
           <input
             class="popup__input"
             type="text"
             name="about"
             value="Исследователь океана"
-            minlength="5"
-            maxlength="150"
+            minlength="2"
+            maxlength="200"
             placeholder="О себе"
             id="userJobInput"
+            required
           />
+          <span class="popup__input-error userJobInput-error"></span>
           <button id='nameSubmitBtn' class="popup__button" type="submit" aria-label="Сохранить">
             Сохранить
           </button>
@@ -90,26 +93,27 @@
     <section class="popup" id="addPhotoPopup">
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
-        <form class="popup__form" name="edit-form" id="photoAddForm">
+        <form class="popup__form" name="edit-form" id="photoAddForm" novalidate>
           <input
             class="popup__input"
             type="text"
             name="photoname"
-            value=""
-            minlength="1"
-            maxlength="45"
+            minlength="2"
+            maxlength="30"
             placeholder="Название"
             id="photoTitle"
+            required
           />
+          <span class="popup__input-error photoTitle-error"></span>
           <input
             class="popup__input"
             type="url"
-            name="photolink"
-            value=""
-            minlength="4"          
+            name="photolink"                            
             placeholder="Ссылка на картинку"
             id="photoLink"
+            required
           />
+          <span class="popup__input-error photoLink-error"></span>
           <button id='photoSubmitBtn' class="popup__button" type="submit" aria-label="Создать">
             Создать
           </button>
@@ -129,7 +133,7 @@
         type="button"
       ></button>
       <figure class="popup__figure">
-        <img class="popup__image" src="./images/gornialtay.jpg">        
+        <img class="popup__image" src="<%=require('./images/gornialtay.jpg')%>">        
         <figcaption class="popup__image-name">Горный Алтай</figcaption>
       </figure>
       
@@ -148,7 +152,6 @@
         </div>
         <button class="card__button-delete opacity" aria-label="Удалить" type="button"></button>
       </li>
-    </template>
-    <script src="./scripts/script.js"></script>
+    </template>   
   </body>
 </html>

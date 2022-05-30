@@ -38,28 +38,14 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__button/_disabled/popup__button_disabled.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
+@import url(../blocks/popup/__wrapper/popup__wrapper.css);
+@import url(../blocks/popup/__figure/popup__figure.css);
+@import url(../blocks/popup/__image-name/popup__image-name.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__big-image/popup__big-image.css);
+@import url(../blocks/popup/__input-error/popup__input-error.css);
+@import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../blocks/popup/__input/_type/_error/popup__input_type_error.css);
 
-.popup__wrapper {
-    position: relative;
-    
-}
-.popup__figure {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-.popup__image-name {
-    margin-top: 10px;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.25;
-}
-.popup__image {
-    max-width: 75vw;
-    max-height: 75vh;
-}
-.popup_big-image{
-    background-color: rgba(0, 0, 0, 0.9);
-}
