@@ -1,21 +1,17 @@
-import {userName, userJob, nameInput, jobInput, nameEditPopup, linkInput, photoTitleInput, cardsContainer, photoAddPopup} from './constans.js';
-import {closePopup} from './modals.js';
-import {renderCard, createCard} from './card.js';
+import {closeByEsc} from './modals.js';
+// Функция закрытия для всех попап-окон
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closeByEsc);     
+};
 
-// Редактирование профиля
-function nameEditFormSubmitHandler() {
-    userName.textContent = nameInput.value;
-    userJob.textContent = jobInput.value;
-    closePopup(nameEditPopup);
-}
-//Добавление пользователем фотографий
-function photoFormSubmitHandler() {
-    const card = createCard(linkInput.value, photoTitleInput.value);
-    renderCard(card, cardsContainer);
-    closePopup(photoAddPopup);
-}
+  // Функция открытия для всех попап-окон
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener('keydown', closeByEsc);   
+};
 
 export {
-    nameEditFormSubmitHandler,
-    photoFormSubmitHandler
+  closePopup,
+  openPopup
 }

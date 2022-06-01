@@ -1,5 +1,5 @@
 import {cardTemplate, imgBigSize, imgPopupCaption, bigImgPopup} from './constans.js';
-import {openPopup} from './modals.js'
+import {openPopup} from './utils.js'
 
 // Функция создания карточки
 function createCard (link, name) {  

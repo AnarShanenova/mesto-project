@@ -1,6 +1,5 @@
 const nameEditPopup = document.querySelector("#nameEditPopup"),
-      photoAddPopup = document.querySelector("#addPhotoPopup"),
-      closeButtons = document.querySelectorAll(".popup__close-btn"),
+      photoAddPopup = document.querySelector("#addPhotoPopup"),      
       nameEditBtn = document.querySelector(".profile__name-edit-button"),
       photoAddBtn = document.querySelector(".profile__add-button"),
       nameEditForm = document.querySelector("#nameEditForm"),
@@ -16,12 +15,12 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       bigImgPopup = document.querySelector("#bigImgPopup"),
       imgBigSize = document.querySelector(".popup__image"),
       imgPopupCaption = document.querySelector(".popup__image-name"),     
-      popupList = Array.from(document.querySelectorAll(".popup"));
+      popupList = Array.from(document.querySelectorAll(".popup")),
+      photoSubmitBtn = document.querySelector('#photoSubmitBtn');
 
 export {
   nameEditPopup,
-  photoAddPopup,
-  closeButtons,
+  photoAddPopup,  
   nameEditBtn,
   photoAddBtn,
   nameEditForm,
@@ -37,5 +36,6 @@ export {
   bigImgPopup,
   imgBigSize,
   imgPopupCaption,
-  popupList
+  popupList,
+  photoSubmitBtn
 }

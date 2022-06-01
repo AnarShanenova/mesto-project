@@ -1,11 +1,10 @@
 import './pages/index.css';
 import enableValidation from './components/validate.js';
 import {initialCards} from './components/initialCards.js';
-import {nameEditFormSubmitHandler, photoFormSubmitHandler} from './components/utils.js';
-import {closePopup, openPopup} from './components/modals.js';
+import {handleProfileFormSubmit, handlePhotoFormSubmit} from './components/modals.js';
+import {closePopup, openPopup} from './components/utils.js';
 import {createCard, renderCard} from './components/card.js';
 import {
-  closeButtons, 
   nameEditBtn, 
   nameInput, 
   jobInput, 
@@ -17,16 +16,21 @@ import {
   photoAddPopup,
   nameEditForm,
   cardsContainer,
-  popupList
+  popupList,
+  photoSubmitBtn
 } from './components/constans.js';
 
-
-// Закрытие попапов крестик-кнопкой 
-closeButtons.forEach(function(button) {
-  button.addEventListener('click', function (e) {
-    closePopup(e.target.closest('.popup'));
-  });
-});
+// Закрытие попапов крестиком или кликом по overlay
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopup(popup)
+      }
+      if (evt.target.classList.contains('popup__close-btn')) {
+        closePopup(popup)
+      }
+  })
+})
 
 // Кнопка открытия окна редактирования профиля
 nameEditBtn.addEventListener("click", function () {
@@ -38,22 +42,24 @@ nameEditBtn.addEventListener("click", function () {
 // Кнопка открытия окна добавления фото
 photoAddBtn.addEventListener("click", function () {
   photoForm.reset();
-  openPopup(photoAddPopup);
+  photoSubmitBtn.setAttribute('disabled', true);
+  photoSubmitBtn.classList.add('popup__button_disabled');
+  openPopup(photoAddPopup);  
 });
 
 // Редактирование профиля
-nameEditForm.addEventListener('submit', nameEditFormSubmitHandler);
+nameEditForm.addEventListener('submit', handleProfileFormSubmit);
 
 // Добавление пользователем фотографий
-photoForm.addEventListener('submit', photoFormSubmitHandler);
+photoForm.addEventListener('submit', handlePhotoFormSubmit);
 
-//Вывод карточек по умолчанию
+// Вывод карточек по умолчанию
 initialCards.forEach(function(element) {
   const card = createCard(element.link, element.name);
   renderCard(card, cardsContainer);
 });
 
-//Live-validation 
+// Live-validation 
 enableValidation(
   {
   formSelector: '.popup__form',
@@ -64,20 +70,3 @@ enableValidation(
   errorClass: 'popup__input-error_active'
   }
 ); 
-
-//Close by esc
-document.addEventListener('keydown', (e) => {  
-  if (e.key === 'Escape') {
-    const target = document.querySelector('.popup_opened');
-    closePopup(target);
-  }
-})
-
-//Close by overlay-click
-popupList.forEach(popup => {
-  popup.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup')) {
-      closePopup(popup);
-    }
-  })
-});
