@@ -16,7 +16,15 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       imgBigSize = document.querySelector(".popup__image"),
       imgPopupCaption = document.querySelector(".popup__image-name"),     
       popupList = Array.from(document.querySelectorAll(".popup")),
-      photoSubmitBtn = document.querySelector('#photoSubmitBtn');
+      photoSubmitBtn = document.querySelector('#photoSubmitBtn'),
+      avatar = document.querySelector(".profile__avatar-wrapper"),
+      avatarEditOverlay = document.querySelector(".profile__avatar-overlay"),
+      avatarEditBtn = document.querySelector(".profile__avatar-edit-button"),
+      avatarEditPopup = document.querySelector("#avatarEditPopup"),
+      avatarInput = document.querySelector("#avatarInput"),
+      avatarEditForm = document.querySelector("#avatarEditForm"),
+      avatarPic = document.querySelector('.profile__avatar')
+     
 
 export {
   nameEditPopup,
@@ -37,5 +45,12 @@ export {
   imgBigSize,
   imgPopupCaption,
   popupList,
-  photoSubmitBtn
+  photoSubmitBtn,
+  avatar,
+  avatarEditOverlay,
+  avatarEditBtn,
+  avatarEditPopup,
+  avatarInput,
+  avatarEditForm,
+  avatarPic  
 }

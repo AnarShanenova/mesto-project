@@ -9,30 +9,43 @@
   <body class="page">
     <header class="header">
       <div class="header__container container container_size_large">
-        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Mesto Russia" />
+        <img
+          class="header__logo"
+          src="<%=require('./images/logo.svg')%>"
+          alt="Mesto Russia"
+        />
       </div>
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__container container">
           <div class="profile__content">
+            <div class="profile__avatar-wrapper">
             <img
               class="profile__avatar"
               src="<%=require('./images/profile_pic.jpg')%>"
               alt="Profile Avatar"
             />
-            <div class="profile__info">
-              <div class="profile__row">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button
-                  class="profile__name-edit-button opacity"
-                  aria-label="Редактировать профиль"
-                  type="button"
-                ></button>
-              </div>
-              <h2 class="profile__description">Исследователь океана</h2>
+            <div class="profile__avatar-overlay">
+              <button class="profile__avatar-edit-button opacity"></button>
             </div>
           </div>
+          
+          <div class="profile__info">
+            <div class="profile__row">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button
+                class="profile__name-edit-button opacity"
+                aria-label="Редактировать профиль"
+                type="button"
+              ></button>
+            </div>
+            <h2 class="profile__description">Исследователь океана</h2>
+           
+          </div>
+        </div>
+
+
           <button
             class="profile__add-button opacity"
             aria-label="Добавить фото"
@@ -41,9 +54,7 @@
         </div>
       </section>
       <section class="elements">
-        <ul class="elements__container container">
-       
-        </ul>
+        <ul class="elements__container container"></ul>
       </section>
     </main>
     <footer class="footer">
@@ -53,9 +64,14 @@
     </footer>
     <section class="popup" id="nameEditPopup">
       <div class="popup__container">
-        <h3 class="popup__title">Редактировать профиль</h3>       
-        <form class="popup__form" name="nameEditForm" id="nameEditForm" novalidate>
-           <input
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form
+          class="popup__form"
+          name="nameEditForm"
+          id="nameEditForm"
+          novalidate
+        >
+          <input
             class="popup__input"
             type="text"
             name="username"
@@ -79,7 +95,12 @@
             required
           />
           <span class="popup__input-error userJobInput-error"></span>
-          <button id='nameSubmitBtn' class="popup__button" type="submit" aria-label="Сохранить">
+          <button
+            id="nameSubmitBtn"
+            class="popup__button"
+            type="submit"
+            aria-label="Сохранить"
+          >
             Сохранить
           </button>
         </form>
@@ -108,13 +129,18 @@
           <input
             class="popup__input"
             type="url"
-            name="photolink"                            
+            name="photolink"
             placeholder="Ссылка на картинку"
             id="photoLink"
             required
           />
           <span class="popup__input-error photoLink-error"></span>
-          <button id='photoSubmitBtn' class="popup__button" type="submit" aria-label="Создать">
+          <button
+            id="photoSubmitBtn"
+            class="popup__button"
+            type="submit"
+            aria-label="Создать"
+          >
             Создать
           </button>
         </form>
@@ -128,30 +154,69 @@
     <section class="popup popup_big-image" id="bigImgPopup">
       <div class="popup__wrapper">
         <button
-        class="popup__close-btn opacity"
-        aria-label="Закрыть"
-        type="button"
-      ></button>
-      <figure class="popup__figure">
-        <img class="popup__image" src="<%=require('./images/gornialtay.jpg')%>">        
-        <figcaption class="popup__image-name">Горный Алтай</figcaption>
-      </figure>
-      
+          class="popup__close-btn opacity"
+          aria-label="Закрыть"
+          type="button"
+        ></button>
+        <figure class="popup__figure">
+          <img
+            class="popup__image"
+            src="<%=require('./images/gornialtay.jpg')%>"
+          />
+          <figcaption class="popup__image-name">Горный Алтай</figcaption>
+        </figure>
       </div>
+    </section>
+    <section class="popup" id="avatarEditPopup">
+      <div class="popup__container">
+        <h3 class="popup__title">Обновить аватар</h3>
+        <form class="popup__form" name="avatarEditForm" id="avatarEditForm" novalidate>
+          <input
+            class="popup__input"
+            type="url"
+            name="avatarInput"
+            placeholder="Ссылка на картинку"
+            id="avatarInput"
+            required
+          />
+          <span class="popup__input-error avatarInput-error"></span>
+          <button
+          id="avatarSubmitBtn"
+          class="popup__button"
+          type="submit"
+          aria-label="Сохранить"
+        >
+        Сохранить
+        </button>
+        </form>
+        <button
+          class="popup__close-btn opacity"
+          aria-label="Закрыть"
+          type="button"
+        ></button>
+      </div>
+
     </section>
     <template class="card-template">
       <li class="card">
-        <img class="card__image">
+        <img class="card__image" />
         <div class="card__title-wrapper">
           <h2 class="card__title"></h2>
-          <button
-            class="card__button-like"
-            aria-label="Нравится"
-            type="button"
-          ></button>
+          <div class="card__like-area">
+            <button
+              class="card__button-like"
+              aria-label="Нравится"
+              type="button"
+            ></button>
+            <p class="card__like-number">0</p>
+          </div>
         </div>
-        <button class="card__button-delete opacity" aria-label="Удалить" type="button"></button>
+        <button
+          class="card__button-delete opacity"
+          aria-label="Удалить"
+          type="button"
+        ></button>
       </li>
-    </template>   
+    </template>
   </body>
 </html>
