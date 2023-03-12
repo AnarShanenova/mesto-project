@@ -20,6 +20,7 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__avatar-wrapper/profile__avatar-wrapper.css);
 @import url(../blocks/profile/__avatar-overlay/profile__avatar-overlay.css);
+@import url(../blocks/profile/__avatar-overlay/__avatar-overlay_visible/profile__avatar-overlay_visible.css);
 @import url(../blocks/profile/__avatar-edit-button/profile__avatar-edit-button.css);
 
 @import url(../blocks/elements/__container/elements__container.css);

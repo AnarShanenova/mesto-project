@@ -1,6 +1,5 @@
 import './pages/index.css';
 import enableValidation from './components/validate.js';
-import {handleEditAvatarForm, handleProfileFormSubmit, handlePhotoFormSubmit} from './components/modals.js';
 import {closePopup, openPopup, renderLoading} from './components/utils.js';
 import {createCard} from './components/card.js';
 import {
@@ -19,12 +18,14 @@ import {
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,
-  avatarEditBtn,
   avatarEditPopup,
   avatarEditForm,
-  avatarPic  
+  avatarPic,
+  linkInput, 
+  photoTitleInput, 
+  avatarInput 
 } from './components/constans.js';
-import {getInitialCards, getUserInf} from './components/api.js';
+import {getInitialCards, getUserInf, updateUserAvatar, updateUserInf, addCard} from './components/api.js';
 
 let myAccount;
 
@@ -36,14 +37,6 @@ const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
   }
-
-getInitialCards()
-  .then((result) => {
-    console.log(result)
-  })
-  .catch((err) => {
-    console.log(err);
-  }); 
 
 Promise.all([getUserInf(), getInitialCards()])
   .then(([users, cards]) => {
@@ -61,20 +54,17 @@ Promise.all([getUserInf(), getInitialCards()])
 
 // Появление кнопки "редактировать фото пользователя" 
 avatar.addEventListener('mouseover', () => {
-  avatarEditOverlay.style.visibility = "visible";
-  avatarEditOverlay.style.opacity = "1"
+  avatarEditOverlay.classList.add('profile__avatar-overlay_visible');
 })
 
 // Скрытие кнопки "редактировать фото пользователя" 
 avatar.addEventListener('mouseout', () => {
-  avatarEditOverlay.style.visibility = "hidden";
-  avatarEditOverlay.style.opacity = "0"
+  avatarEditOverlay.classList.remove('profile__avatar-overlay_visible');
 })
 
 // Кнопка открытия окна редактирования аватара пользователя
-avatarEditBtn.addEventListener("click", function () {
-  avatarEditForm.reset();
-  renderLoading(avatarEditForm, config.submitButtonSelector, false);
+avatar.addEventListener("click", function () {
+  avatarEditForm.reset();  
   openPopup(avatarEditPopup);  
 })
 
@@ -82,8 +72,7 @@ avatarEditBtn.addEventListener("click", function () {
 nameEditBtn.addEventListener("click", function () {
   nameEditForm.reset();
   nameInput.value = userName.textContent;
-  jobInput.value = userJob.textContent;
-  renderLoading(nameEditForm, config.submitButtonSelector, false);
+  jobInput.value = userJob.textContent;  
   openPopup(nameEditPopup);
 });
 
@@ -91,10 +80,58 @@ nameEditBtn.addEventListener("click", function () {
 photoAddBtn.addEventListener("click", function () {
   photoForm.reset();
   photoSubmitBtn.setAttribute('disabled', true);
-  photoSubmitBtn.classList.add('popup__button_disabled');
-  renderLoading(photoAddPopup, config.submitButtonSelector, false);
+  photoSubmitBtn.classList.add('popup__button_disabled');  
   openPopup(photoAddPopup);  
 });
+
+// Обработчик для обновления фото-аватара пользователя
+function handleEditAvatarForm() {  
+  renderLoading(avatarEditForm, config.submitButtonSelector, true);   
+  return updateUserAvatar(avatarInput.value)
+    .then((res) => {
+      avatarPic.src = res.avatar;
+      closePopup(avatarEditPopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(avatarEditForm, config.submitButtonSelector, false);
+    });   
+}
+
+// Обработчик для редактирования информации о пользователе
+function handleProfileFormSubmit() {
+  renderLoading(nameEditForm, config.submitButtonSelector, true);
+  return updateUserInf(nameInput.value, jobInput.value)
+    .then((res) => {
+      userName.textContent = res.name;
+      userJob.textContent = res.about;
+      closePopup(nameEditPopup)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(nameEditForm, config.submitButtonSelector, false);
+    });
+}
+
+// Обработчик для добавления новой фото-карточки
+function handlePhotoFormSubmit() {
+  renderLoading(photoForm, config.submitButtonSelector, true);  
+  return addCard(photoTitleInput.value, linkInput.value)
+    .then((res) => {
+      cardsContainer.prepend(createCard(res.link, res.name, res.likes, res.owner._id, res._id));
+      closePopup(photoAddPopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(photoForm, config.submitButtonSelector, false);
+    });    
+}
 
 // Редактирование аватара пользователя
 avatarEditForm.addEventListener('submit', handleEditAvatarForm);
@@ -121,5 +158,5 @@ popupList.forEach((popup) => {
 enableValidation(config); 
 
 export {
-  myAccount, 
-  config}
+  myAccount
+}

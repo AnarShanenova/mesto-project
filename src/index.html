@@ -44,8 +44,6 @@
            
           </div>
         </div>
-
-
           <button
             class="profile__add-button opacity"
             aria-label="Добавить фото"
@@ -78,6 +76,8 @@
             value="Жак-Ив Кусто"
             minlength="2"
             maxlength="40"
+            pattern="^[a-zA-Zа-яёА-ЯЁ\s-]+$"
+            data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
             placeholder="Имя"
             id="usernameInput"
             required
@@ -90,6 +90,8 @@
             value="Исследователь океана"
             minlength="2"
             maxlength="200"
+            pattern="^[a-zA-Zа-яёА-ЯЁ\s-]+$"
+            data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
             placeholder="О себе"
             id="userJobInput"
             required
@@ -121,6 +123,8 @@
             name="photoname"
             minlength="2"
             maxlength="30"
+            pattern="^[a-zA-Zа-яёА-ЯЁ\s-]+$"
+            data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
             placeholder="Название"
             id="photoTitle"
             required
@@ -130,6 +134,7 @@
             class="popup__input"
             type="url"
             name="photolink"
+            data-error-message="Введите адрес сайта"
             placeholder="Ссылка на картинку"
             id="photoLink"
             required
@@ -175,6 +180,7 @@
             class="popup__input"
             type="url"
             name="avatarInput"
+            data-error-message="Введите адрес сайта"
             placeholder="Ссылка на картинку"
             id="avatarInput"
             required

@@ -19,11 +19,10 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       photoSubmitBtn = document.querySelector('#photoSubmitBtn'),
       avatar = document.querySelector(".profile__avatar-wrapper"),
       avatarEditOverlay = document.querySelector(".profile__avatar-overlay"),
-      avatarEditBtn = document.querySelector(".profile__avatar-edit-button"),
       avatarEditPopup = document.querySelector("#avatarEditPopup"),
       avatarInput = document.querySelector("#avatarInput"),
       avatarEditForm = document.querySelector("#avatarEditForm"),
-      avatarPic = document.querySelector('.profile__avatar')
+      avatarPic = document.querySelector('.profile__avatar');
      
 
 export {
@@ -48,7 +47,6 @@ export {
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,
-  avatarEditBtn,
   avatarEditPopup,
   avatarInput,
   avatarEditForm,
