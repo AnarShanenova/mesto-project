@@ -1,3 +1,5 @@
+import Popup from './popup.js';
+
 const nameEditPopup = document.querySelector("#nameEditPopup"),
       photoAddPopup = document.querySelector("#addPhotoPopup"),      
       nameEditBtn = document.querySelector(".profile__name-edit-button"),
@@ -16,6 +18,17 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       imgBigSize = document.querySelector(".popup__image"),
       imgPopupCaption = document.querySelector(".popup__image-name"),     
       popupList = Array.from(document.querySelectorAll(".popup")),
+      
+      popupObjects = popupList.map(element => {
+        let popupId = element.id;
+        let popup = new Popup(popupId);
+        return popup
+      }),
+      nameEditPopupObject = new Popup("nameEditPopup"),
+      photoAddPopupObject = new Popup("addPhotoPopup"),  
+      avatarEditPopupObject = new Popup("avatarEditPopup"),  
+      bigImgPopupObject = new Popup("bigImgPopup"),
+    
       photoSubmitBtn = document.querySelector('#photoSubmitBtn'),
       avatar = document.querySelector(".profile__avatar-wrapper"),
       avatarEditOverlay = document.querySelector(".profile__avatar-overlay"),
@@ -24,6 +37,7 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       avatarEditForm = document.querySelector("#avatarEditForm"),
       avatarPic = document.querySelector('.profile__avatar');
      
+
 
 export {
   nameEditPopup,
@@ -43,7 +57,13 @@ export {
   bigImgPopup,
   imgBigSize,
   imgPopupCaption,
-  popupList,
+  // popupList,
+  nameEditPopupObject,
+  photoAddPopupObject,
+  avatarEditPopupObject,
+  bigImgPopupObject,
+
+  popupObjects,
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,

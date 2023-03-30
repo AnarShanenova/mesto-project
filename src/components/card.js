@@ -1,4 +1,4 @@
-import {cardTemplate, imgBigSize, imgPopupCaption, bigImgPopup} from './constans.js';
+import {cardTemplate, imgBigSize, imgPopupCaption, bigImgPopup, bigImgPopupObject} from './constans.js';
 import {openPopup} from './utils.js'
 import {myAccount} from '../index.js'
 import {putLike, removeLike, deleteCard} from './api.js'
@@ -66,7 +66,8 @@ function createCard (link, name, likes, owner, id) {
       imgBigSize.src = link;
       imgBigSize.alt = name;
       imgPopupCaption.textContent = name;
-      openPopup(bigImgPopup);
+      // openPopup(bigImgPopup);
+      bigImgPopupObject.open();
     });
   
     return cardElement;

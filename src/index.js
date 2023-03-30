@@ -14,7 +14,14 @@ import {
   photoAddPopup,
   nameEditForm,
   cardsContainer,
-  popupList,
+
+  // popupList,
+  popupObjects,
+  nameEditPopupObject,
+  photoAddPopupObject,
+  avatarEditPopupObject,
+  bigImgPopupObject,
+
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,
@@ -65,7 +72,8 @@ avatar.addEventListener('mouseout', () => {
 // Кнопка открытия окна редактирования аватара пользователя
 avatar.addEventListener("click", function () {
   avatarEditForm.reset();  
-  openPopup(avatarEditPopup);  
+  // openPopup(avatarEditPopup);  
+  avatarEditPopupObject.open();
 })
 
 // Кнопка открытия окна редактирования профиля
@@ -73,7 +81,8 @@ nameEditBtn.addEventListener("click", function () {
   nameEditForm.reset();
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;  
-  openPopup(nameEditPopup);
+  // openPopup(nameEditPopup);
+  nameEditPopupObject.open();
 });
 
 // Кнопка открытия окна добавления фото
@@ -81,7 +90,8 @@ photoAddBtn.addEventListener("click", function () {
   photoForm.reset();
   photoSubmitBtn.setAttribute('disabled', true);
   photoSubmitBtn.classList.add('popup__button_disabled');  
-  openPopup(photoAddPopup);  
+  // openPopup(photoAddPopup);  
+  photoAddPopupObject.open();
 });
 
 // Обработчик для обновления фото-аватара пользователя
@@ -90,7 +100,8 @@ function handleEditAvatarForm() {
   return updateUserAvatar(avatarInput.value)
     .then((res) => {
       avatarPic.src = res.avatar;
-      closePopup(avatarEditPopup);
+      // closePopup(avatarEditPopup);
+      avatarEditPopupObject.close();
     })
     .catch((err) => {
       console.log(err);
@@ -107,7 +118,8 @@ function handleProfileFormSubmit() {
     .then((res) => {
       userName.textContent = res.name;
       userJob.textContent = res.about;
-      closePopup(nameEditPopup)
+      // closePopup(nameEditPopup)
+      nameEditPopupObject.close();
     })
     .catch((err) => {
       console.log(err);
@@ -123,7 +135,8 @@ function handlePhotoFormSubmit() {
   return addCard(photoTitleInput.value, linkInput.value)
     .then((res) => {
       cardsContainer.prepend(createCard(res.link, res.name, res.likes, res.owner._id, res._id));
-      closePopup(photoAddPopup);
+      // closePopup(photoAddPopup);
+      photoAddPopupObject.close();
     })
     .catch((err) => {
       console.log(err);
@@ -143,15 +156,18 @@ nameEditForm.addEventListener('submit', handleProfileFormSubmit);
 photoForm.addEventListener('submit', handlePhotoFormSubmit);
 
 // Закрытие попапов крестиком или кликом по overlay
-popupList.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains('popup_opened')) {
-          closePopup(popup)
-      }
-      if (evt.target.classList.contains('popup__close-btn')) {
-        closePopup(popup)
-      }
-  })
+// popupList.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//       if (evt.target.classList.contains('popup_opened')) {
+//           closePopup(popup)
+//       }
+//       if (evt.target.classList.contains('popup__close-btn')) {
+//         closePopup(popup)
+//       }
+//   })
+// })
+popupObjects.forEach((popup) => {
+  popup.setEventListeners()
 })
 
 // Live-validation 
