@@ -1,107 +1,89 @@
-const apiConfig = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-20",
-  headers: {
-    authorization: "340a2beb-4d1b-4011-9455-07dbc10b8c56",
-    "Content-Type": "application/json",
+export default class Api {
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
-};
-// Проверка ответа сервера
-const checkResponse = (res) => {
+
+  // Метод проверки ответа сервера
+  _checkResponse(res) {
     if (res.ok) {
-        return res.json();
+      return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-// Получить информацию о пользователе
-export function getUserInf() {
-  return fetch(`${apiConfig.baseUrl}/users/me`, {
-    method: 'GET',
-    headers: {
-      authorization: apiConfig.headers.authorization
-    }
-  })
-  .then(res => checkResponse(res));
-}
+  // Метод получения информации о пользователе
+  getUser() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-// Редактирование информации о пользователе 
-export function updateUserInf(userNameInf, userJobInf) {
-  return fetch(`${apiConfig.baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: apiConfig.headers,
-    body: JSON.stringify ({
-      name: userNameInf,
-      about: userJobInf
-    })
-  })
-  .then(res => checkResponse(res));
-}
+  // Метод редактирования информации о пользователе
+  updateUserInf(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      }),
+    }).then(this._checkResponse);
+  }
 
-// Обновление фото-аватара пользователя
-export function updateUserAvatar(userAvatar) {
-  return fetch(`${apiConfig.baseUrl}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: apiConfig.headers,
-    body: JSON.stringify ({
-      avatar: userAvatar
-    })
-  })
-  .then(res => checkResponse(res));
-}
+  // Метод редактирования аватара пользователя
+  updateUserAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    }).then(this._checkResponse);
+  }
 
-// Запрос фото-карточек с сервера
-export function getInitialCards() {
-  return fetch(`${apiConfig.baseUrl}/cards`, {
-    method: 'GET',
-    headers: apiConfig.headers
-  })
-  .then(res => checkResponse(res));
-}
+  // Метод запроса карточек с сервера
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'GET',
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+  
+  // Метод добавления лайка
+  putLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-// Поставить лайк
-export function putLike(id) {
-  return fetch(`${apiConfig.baseUrl}/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: {
-      authorization: apiConfig.headers.authorization
-    }
-  })
-  .then(res => checkResponse(res));
-}
-// Убрать лайк
-export function removeLike(id) {
-  return fetch(`${apiConfig.baseUrl}/cards/likes/${id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: apiConfig.headers.authorization
-    }
-  })
-  .then(res => checkResponse(res));
-}
+   // Метод удаления лайков
+   removeLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-// Добавление новой карточки пользователем
-export function addCard(cardTitle, cardImgUrl) {
-  return fetch(`${apiConfig.baseUrl}/cards`, {
-    method: 'POST',
-    headers: {
-      authorization: apiConfig.headers.authorization,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify ({
-      name: cardTitle,
-      link: cardImgUrl
-    })
-  })
-  .then(res => checkResponse(res));
-}
-
-// Удаление фото-карточки
-export function deleteCard(id) {
-  return fetch(`${apiConfig.baseUrl}/cards/${id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: apiConfig.headers.authorization
-    }
-  })
-  .then(res => checkResponse(res));
+  // Метод добавления новой карточки пользователем
+  addCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
+    }).then(this._checkResponse);
+  }  
+ 
+  // Метод удаления карточки
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 }
