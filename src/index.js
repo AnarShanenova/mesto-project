@@ -58,13 +58,13 @@ Promise.all([getUserInf(), getInitialCards()])
         name: card.name,
         likes: card.likes,
         owner: card.owner._id,
-        id: card._id
+        id: card._id,
+        handleCardClick: function () {    
+          bigImgPopupObject.open(card.link, card.name);
+        }
       }, ".card-template")
 
-      // console.log(cardObject);
-
       cardsContainer.prepend(cardObject.render())
-      // cardsContainer.prepend(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
     });    
   })
   .catch((err) => {
@@ -146,7 +146,18 @@ function handlePhotoFormSubmit() {
   renderLoading(photoForm, config.submitButtonSelector, true);  
   return addCard(photoTitleInput.value, linkInput.value)
     .then((res) => {
-      cardsContainer.prepend(createCard(res.link, res.name, res.likes, res.owner._id, res._id));
+      const cardObject = new Card({
+        link: res.link,
+        name: res.name,
+        likes: res.likes,
+        owner: res.owner._id,
+        id: res._id,
+        handleCardClick: function () {    
+          bigImgPopupObject.open(res.link, res.name);
+        }
+      }, ".card-template")
+
+      cardsContainer.prepend(cardObject.render())
       // closePopup(photoAddPopup);
       photoAddPopupObject.close();
     })
