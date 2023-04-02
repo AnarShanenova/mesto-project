@@ -1,7 +1,7 @@
 import './pages/index.css';
 import enableValidation from './components/validate.js';
 import {closePopup, openPopup, renderLoading} from './components/utils.js';
-import {createCard} from './components/card.js';
+import {createCard} from './components/Card.js';
 import {
   nameEditBtn, 
   nameInput, 

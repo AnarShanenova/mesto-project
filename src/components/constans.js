@@ -1,4 +1,5 @@
 import Popup from './popup.js';
+import PopupWithImage from './popupwithimage.js';
 
 const nameEditPopup = document.querySelector("#nameEditPopup"),
       photoAddPopup = document.querySelector("#addPhotoPopup"),      
@@ -14,7 +15,7 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       linkInput = document.querySelector("#photoLink"),
       cardsContainer = document.querySelector(".elements__container"),
       cardTemplate = document.querySelector(".card-template").content,
-      bigImgPopup = document.querySelector("#bigImgPopup"),
+      // bigImgPopup = document.querySelector("#bigImgPopup"),
       imgBigSize = document.querySelector(".popup__image"),
       imgPopupCaption = document.querySelector(".popup__image-name"),     
       popupList = Array.from(document.querySelectorAll(".popup")),
@@ -27,7 +28,7 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       nameEditPopupObject = new Popup("nameEditPopup"),
       photoAddPopupObject = new Popup("addPhotoPopup"),  
       avatarEditPopupObject = new Popup("avatarEditPopup"),  
-      bigImgPopupObject = new Popup("bigImgPopup"),
+      bigImgPopupObject = new PopupWithImage("bigImgPopup"),
     
       photoSubmitBtn = document.querySelector('#photoSubmitBtn'),
       avatar = document.querySelector(".profile__avatar-wrapper"),
@@ -54,7 +55,7 @@ export {
   linkInput,
   cardsContainer,
   cardTemplate,
-  bigImgPopup,
+  // bigImgPopup,
   imgBigSize,
   imgPopupCaption,
   // popupList,
