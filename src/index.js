@@ -1,7 +1,7 @@
 import './pages/index.css';
 import enableValidation from './components/validate.js';
 import {closePopup, openPopup, renderLoading} from './components/utils.js';
-import {createCard} from './components/Card.js';
+import Card from './components/Card.js';
 import {
   nameEditBtn, 
   nameInput, 
@@ -52,7 +52,19 @@ Promise.all([getUserInf(), getInitialCards()])
     avatarPic.src = users.avatar;
     myAccount = users._id;
     cards.forEach((card) => {
-      cardsContainer.prepend(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
+
+      const cardObject = new Card({
+        link: card.link,
+        name: card.name,
+        likes: card.likes,
+        owner: card.owner._id,
+        id: card._id
+      }, ".card-template")
+
+      // console.log(cardObject);
+
+      cardsContainer.prepend(cardObject.render())
+      // cardsContainer.prepend(createCard(card.link, card.name, card.likes, card.owner._id, card._id))
     });    
   })
   .catch((err) => {

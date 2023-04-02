@@ -5,6 +5,7 @@ const apiConfig = {
     "Content-Type": "application/json",
   }
 };
+
 // Проверка ответа сервера
 const checkResponse = (res) => {
     if (res.ok) {
@@ -60,6 +61,8 @@ export function getInitialCards() {
 
 // Поставить лайк
 export function putLike(id) {
+  // console.log(`${apiConfig.baseUrl}/cards/likes/${id}`)
+
   return fetch(`${apiConfig.baseUrl}/cards/likes/${id}`, {
     method: 'PUT',
     headers: {
