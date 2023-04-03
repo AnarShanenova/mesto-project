@@ -14,9 +14,9 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       photoTitleInput = document.querySelector("#photoTitle"),
       linkInput = document.querySelector("#photoLink"),
       cardsContainer = document.querySelector(".elements__container"),
-      cardTemplate = document.querySelector(".card-template").content,
+      // cardTemplate = document.querySelector(".card-template").content,
       // bigImgPopup = document.querySelector("#bigImgPopup"),
-      imgBigSize = document.querySelector(".popup__image"),
+      // imgBigSize = document.querySelector(".popup__image"),
       imgPopupCaption = document.querySelector(".popup__image-name"),     
       popupList = Array.from(document.querySelectorAll(".popup")),
       
@@ -29,7 +29,6 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       photoAddPopupObject = new Popup("addPhotoPopup"),  
       avatarEditPopupObject = new Popup("avatarEditPopup"),  
       bigImgPopupObject = new PopupWithImage("bigImgPopup"),
-    
       photoSubmitBtn = document.querySelector('#photoSubmitBtn'),
       avatar = document.querySelector(".profile__avatar-wrapper"),
       avatarEditOverlay = document.querySelector(".profile__avatar-overlay"),
@@ -37,7 +36,6 @@ const nameEditPopup = document.querySelector("#nameEditPopup"),
       avatarInput = document.querySelector("#avatarInput"),
       avatarEditForm = document.querySelector("#avatarEditForm"),
       avatarPic = document.querySelector('.profile__avatar');
-     
 
 
 export {
@@ -54,16 +52,15 @@ export {
   photoTitleInput,
   linkInput,
   cardsContainer,
-  cardTemplate,
+  // cardTemplate,
   // bigImgPopup,
-  imgBigSize,
+  // imgBigSize,
   imgPopupCaption,
   // popupList,
   nameEditPopupObject,
   photoAddPopupObject,
   avatarEditPopupObject,
   bigImgPopupObject,
-
   popupObjects,
   photoSubmitBtn,
   avatar,

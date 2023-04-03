@@ -1,31 +1,25 @@
 import './pages/index.css';
-import enableValidation from './components/validate.js';
-import {closePopup, openPopup, renderLoading} from './components/utils.js';
+import enableValidation from './components/FormValidator.js';
+import {renderLoading} from './components/utils.js';
 import Card from './components/Card.js';
 import {
   nameEditBtn, 
   nameInput, 
   jobInput, 
   userName, 
-  userJob, 
-  nameEditPopup, 
+  userJob,  
   photoAddBtn,
   photoForm,
-  photoAddPopup,
   nameEditForm,
   cardsContainer,
-
-  // popupList,
   popupObjects,
   nameEditPopupObject,
   photoAddPopupObject,
   avatarEditPopupObject,
   bigImgPopupObject,
-
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,
-  avatarEditPopup,
   avatarEditForm,
   avatarPic,
   linkInput, 
@@ -93,7 +87,6 @@ nameEditBtn.addEventListener("click", function () {
   nameEditForm.reset();
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;  
-  // openPopup(nameEditPopup);
   nameEditPopupObject.open();
 });
 
@@ -101,8 +94,7 @@ nameEditBtn.addEventListener("click", function () {
 photoAddBtn.addEventListener("click", function () {
   photoForm.reset();
   photoSubmitBtn.setAttribute('disabled', true);
-  photoSubmitBtn.classList.add('popup__button_disabled');  
-  // openPopup(photoAddPopup);  
+  photoSubmitBtn.classList.add('popup__button_disabled');   
   photoAddPopupObject.open();
 });
 
@@ -112,7 +104,6 @@ function handleEditAvatarForm() {
   return updateUserAvatar(avatarInput.value)
     .then((res) => {
       avatarPic.src = res.avatar;
-      // closePopup(avatarEditPopup);
       avatarEditPopupObject.close();
     })
     .catch((err) => {
@@ -130,7 +121,6 @@ function handleProfileFormSubmit() {
     .then((res) => {
       userName.textContent = res.name;
       userJob.textContent = res.about;
-      // closePopup(nameEditPopup)
       nameEditPopupObject.close();
     })
     .catch((err) => {
@@ -158,7 +148,6 @@ function handlePhotoFormSubmit() {
       }, ".card-template")
 
       cardsContainer.prepend(cardObject.render())
-      // closePopup(photoAddPopup);
       photoAddPopupObject.close();
     })
     .catch((err) => {
@@ -179,16 +168,6 @@ nameEditForm.addEventListener('submit', handleProfileFormSubmit);
 photoForm.addEventListener('submit', handlePhotoFormSubmit);
 
 // Закрытие попапов крестиком или кликом по overlay
-// popupList.forEach((popup) => {
-//   popup.addEventListener('mousedown', (evt) => {
-//       if (evt.target.classList.contains('popup_opened')) {
-//           closePopup(popup)
-//       }
-//       if (evt.target.classList.contains('popup__close-btn')) {
-//         closePopup(popup)
-//       }
-//   })
-// })
 popupObjects.forEach((popup) => {
   popup.setEventListeners()
 })
