@@ -2,6 +2,8 @@ import './pages/index.css';
 import enableValidation from './components/FormValidator.js';
 import {renderLoading} from './components/utils.js';
 import Card from './components/Card.js';
+import Popup from './components/popup';
+import PopupWithImage from './components/popupwithimage';
 import {
   nameEditBtn, 
   nameInput, 
@@ -12,11 +14,7 @@ import {
   photoForm,
   nameEditForm,
   cardsContainer,
-  popupObjects,
-  nameEditPopupObject,
-  photoAddPopupObject,
-  avatarEditPopupObject,
-  bigImgPopupObject,
+  popupList,
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,
@@ -38,6 +36,17 @@ const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
   }
+
+const popupObjects = popupList.map(element => {
+  let popupId = element.id;
+  let popup = new Popup(popupId);
+  return popup
+});
+
+const nameEditPopupObject = new Popup("nameEditPopup");
+const photoAddPopupObject = new Popup("addPhotoPopup");
+const avatarEditPopupObject = new Popup("avatarEditPopup");  
+const bigImgPopupObject = new PopupWithImage("bigImgPopup");
 
 Promise.all([getUserInf(), getInitialCards()])
   .then(([users, cards]) => {
