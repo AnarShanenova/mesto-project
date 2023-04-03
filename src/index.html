@@ -72,7 +72,7 @@
           <input
             class="popup__input"
             type="text"
-            name="username"
+            name="name"
             value="Жак-Ив Кусто"
             minlength="2"
             maxlength="40"
@@ -113,14 +113,14 @@
         ></button>
       </div>
     </section>
-    <section class="popup" id="addPhotoPopup">
+    <section class="popup addPhotoPopup" id="addPhotoPopup">
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form" name="edit-form" id="photoAddForm" novalidate>
           <input
             class="popup__input"
             type="text"
-            name="photoname"
+            name="name"
             minlength="2"
             maxlength="30"
             pattern="^[a-zA-Zа-яёА-ЯЁ\s-]+$"
@@ -133,7 +133,7 @@
           <input
             class="popup__input"
             type="url"
-            name="photolink"
+            name="link"
             data-error-message="Введите адрес сайта"
             placeholder="Ссылка на картинку"
             id="photoLink"
@@ -172,14 +172,14 @@
         </figure>
       </div>
     </section>
-    <section class="popup" id="avatarEditPopup">
+    <section class="popup avatarEditPopup" id="avatarEditPopup">
       <div class="popup__container">
         <h3 class="popup__title">Обновить аватар</h3>
         <form class="popup__form" name="avatarEditForm" id="avatarEditForm" novalidate>
           <input
             class="popup__input"
             type="url"
-            name="avatarInput"
+            name="avatar"
             data-error-message="Введите адрес сайта"
             placeholder="Ссылка на картинку"
             id="avatarInput"

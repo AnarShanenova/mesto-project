@@ -1,4 +1,6 @@
 const nameEditPopupSelector = ".nameEditPopup",
+      addPhotoPopupSelector = ".addPhotoPopup",
+      avatarEditPopupSelector = ".avatarEditPopup",
       photoAddPopup = document.querySelector("#addPhotoPopup"),      
       nameEditBtn = document.querySelector(".profile__name-edit-button"),
       photoAddBtn = document.querySelector(".profile__add-button"),
@@ -27,6 +29,8 @@ const nameEditPopupSelector = ".nameEditPopup",
 
 export {
   nameEditPopupSelector,
+  addPhotoPopupSelector,
+  avatarEditPopupSelector,
   photoAddPopup,  
   nameEditBtn,
   photoAddBtn,

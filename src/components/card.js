@@ -1,7 +1,8 @@
 import {cardTemplate, imgBigSize, imgPopupCaption, bigImgPopup} from './constans.js';
-import {openPopup} from './utils.js'
+import {openPopup} from './utils.js' 
 import {myAccount} from '../index.js'
-import {putLike, removeLike, deleteCard} from './api.js'
+/* import {putLike, removeLike, deleteCard} from './api.js' */
+
 
 // Функция создания карточки
 function createCard (link, name, likes, owner, id) {  
