@@ -13,9 +13,6 @@ const nameEditPopupSelector = ".nameEditPopup",
       photoTitleInput = document.querySelector("#photoTitle"),
       linkInput = document.querySelector("#photoLink"),
       cardsContainer = document.querySelector(".elements__container"),
-      cardTemplate = document.querySelector(".card-template").content,
-      bigImgPopup = document.querySelector("#bigImgPopup"),
-      imgBigSize = document.querySelector(".popup__image"),
       imgPopupCaption = document.querySelector(".popup__image-name"),     
       popupList = Array.from(document.querySelectorAll(".popup")),
       photoSubmitBtn = document.querySelector('#photoSubmitBtn'),
@@ -25,7 +22,7 @@ const nameEditPopupSelector = ".nameEditPopup",
       avatarInput = document.querySelector("#avatarInput"),
       avatarEditForm = document.querySelector("#avatarEditForm"),
       avatarPic = document.querySelector('.profile__avatar');
-     
+
 
 export {
   nameEditPopupSelector,
@@ -43,9 +40,6 @@ export {
   photoTitleInput,
   linkInput,
   cardsContainer,
-  cardTemplate,
-  bigImgPopup,
-  imgBigSize,
   imgPopupCaption,
   popupList,
   photoSubmitBtn,

@@ -1,22 +1,31 @@
-import {cardTemplate, imgBigSize, imgPopupCaption, bigImgPopup} from './constans.js';
-import {openPopup} from './utils.js' 
 import {myAccount} from '../index.js'
 /* import {putLike, removeLike, deleteCard} from './api.js' */
 
 
-// Функция создания карточки
-function createCard (link, name, likes, owner, id) {  
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImg = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const likeButton = cardElement.querySelector(".card__button-like");
-    const deleteButton = cardElement.querySelector(".card__button-delete");
-    const likesNumber = cardElement.querySelector('.card__like-number');
+export default class Card {
+  constructor({ link, name, likes, owner, id, handleCardClick}, selector) {
+    this._selector = selector;
+    this._link = link;
+    this._name = name;
+    this._likes = likes;
+    this._owner = owner;
+    this._id = id;
+    this._handleCardClick = handleCardClick;
+  }
 
-    cardImg.src = link;
-    cardTitle.textContent = name;
-    cardImg.alt = name;    
-    likesNumber.textContent = likes.length;
+  _getCard() {
+    const cardElement = document
+      .querySelector(this._selector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
+
+    return cardElement;
+  }
+
+  _setEventListeners(likeButton, likesNumber, deleteButton, cardImg, cardElement) {
+    const id = this._id;
+    const handleCardClick = this._handleCardClick;
 
     // Кнопка "Лайк"    
     likeButton.addEventListener('click', function(evt) {
@@ -40,14 +49,7 @@ function createCard (link, name, likes, owner, id) {
           });
       }
     });
-
-    likes.forEach((user) => {
-      if (user._id === myAccount) {
-        likeButton.classList.add('card__button-like_active');
-      }
-    })   
-
-    // Кнопка "Удалить фото-карточку"   
+    // Кнопка "Удалить фото-карточку"
     deleteButton.addEventListener('click', function (evt) {
       deleteCard(id)
       .then(() => {
@@ -56,28 +58,45 @@ function createCard (link, name, likes, owner, id) {
       .catch((err) => {
         console.log(err);
       })      
-    }); 
-    
-    if (owner !== myAccount) {
+    });
+    // Открытие фото в полный размер  
+    cardImg.addEventListener('click',  handleCardClick);
+  }
+
+  _isLikedByUser(likeButton) {
+    this._likes.forEach((user) => {
+      if (user._id === myAccount) {
+        likeButton.classList.add('card__button-like_active');
+      }
+    }) 
+  }
+
+  _deleteButtonDisable(deleteButton) {
+    if (this._owner !== myAccount) {
       deleteButton.classList.add('card__button-delete_disabled');
     }
+  }
+  // Метод, который возвращает полностью работоспособный 
+  // и наполненный данными элемент карточки
+  render() {
+    console.log("RENDER");
 
-    // Открытие фото в полный размер  
-    cardImg.addEventListener('click',  function () {    
-      imgBigSize.src = link;
-      imgBigSize.alt = name;
-      imgPopupCaption.textContent = name;
-      openPopup(bigImgPopup);
-    });
-  
+    const cardElement = this._getCard()
+    const cardImg = cardElement.querySelector('.card__image');
+    const cardTitle = cardElement.querySelector('.card__title');
+    const likeButton = cardElement.querySelector(".card__button-like");
+    const deleteButton = cardElement.querySelector(".card__button-delete");
+    const likesNumber = cardElement.querySelector('.card__like-number');
+
+    cardImg.src = this._link;
+    cardTitle.textContent = this._name;
+    cardImg.alt = this._name;    
+    likesNumber.textContent = this._likes.length;
+
+    this._setEventListeners(likeButton, likesNumber, deleteButton, cardImg, cardElement);
+    this._isLikedByUser(likeButton);
+    this._deleteButtonDisable(deleteButton);
+
     return cardElement;
   }
-  
-  // Функция добавления карточки в контейнер
-  function renderCard(card, container) {
-    container.prepend(card);
-  }
-  export {
-      createCard,
-      renderCard
-  }
+}

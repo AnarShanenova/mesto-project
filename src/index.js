@@ -1,26 +1,23 @@
-import "./pages/index.css";
-import enableValidation from "./components/validate.js";
-import { /* closePopup, openPopup, */ renderLoading } from "./components/utils.js";
-import { createCard } from "./components/card.js";
+import './pages/index.css';
+import enableValidation from './components/FormValidator.js';
+import {renderLoading} from './components/utils.js';
+import Card from './components/Card.js';
+import Popup from './components/popup';
+import PopupWithImage from './components/popupwithimage';
 import {
-  nameEditBtn,
-  nameInput,
-  jobInput,
-  userName,
-  userJob,
-  nameEditPopupSelector,
-  addPhotoPopupSelector,
-  avatarEditPopupSelector,
+  nameEditBtn, 
+  nameInput, 
+  jobInput, 
+  userName, 
+  userJob,  
   photoAddBtn,
   photoForm,
-  photoAddPopup,
   nameEditForm,
   cardsContainer,
   popupList,
   photoSubmitBtn,
   avatar,
   avatarEditOverlay,
-  avatarEditPopup,
   avatarEditForm,
   avatarPic,
   linkInput,
@@ -53,6 +50,18 @@ const config = {
 };
 
 /* Promise.all([getUser(), getInitialCards()])
+const popupObjects = popupList.map(element => {
+  let popupId = element.id;
+  let popup = new Popup(popupId);
+  return popup
+});
+
+const nameEditPopupObject = new Popup("nameEditPopup");
+const photoAddPopupObject = new Popup("addPhotoPopup");
+const avatarEditPopupObject = new Popup("avatarEditPopup");  
+const bigImgPopupObject = new PopupWithImage("bigImgPopup");
+
+Promise.all([getUserInf(), getInitialCards()])
   .then(([users, cards]) => {
     userName.textContent = users.name;
     userJob.textContent = users.about;
@@ -74,6 +83,20 @@ Promise.all([api.getUser(), api.getInitialCards()])
     userInfo.setUserInfo(users);
     cardsList.renderItems(cards);
     
+
+      const cardObject = new Card({
+        link: card.link,
+        name: card.name,
+        likes: card.likes,
+        owner: card.owner._id,
+        id: card._id,
+        handleCardClick: function () {    
+          bigImgPopupObject.open(card.link, card.name);
+        }
+      }, ".card-template")
+
+      cardsContainer.prepend(cardObject.render())
+    });    
   })
   .catch((err) => {
     console.log(err);
@@ -194,7 +217,7 @@ avatar.addEventListener("mouseout", () => {
   return updateUserAvatar(avatarInput.value)
     .then((res) => {
       avatarPic.src = res.avatar;
-      closePopup(avatarEditPopup);
+      avatarEditPopupObject.close();
     })
     .catch((err) => {
       console.log(err);
@@ -211,7 +234,7 @@ avatar.addEventListener("mouseout", () => {
     .then((res) => {
       userName.textContent = res.name;
       userJob.textContent = res.about;
-      closePopup(nameEditPopup);
+      nameEditPopupObject.close();
     })
     .catch((err) => {
       console.log(err);
@@ -226,10 +249,19 @@ avatar.addEventListener("mouseout", () => {
   renderLoading(photoForm, config.submitButtonSelector, true);
   return addCard(photoTitleInput.value, linkInput.value)
     .then((res) => {
-      cardsContainer.prepend(
-        createCard(res.link, res.name, res.likes, res.owner._id, res._id)
-      );
-      closePopup(photoAddPopup);
+      const cardObject = new Card({
+        link: res.link,
+        name: res.name,
+        likes: res.likes,
+        owner: res.owner._id,
+        id: res._id,
+        handleCardClick: function () {    
+          bigImgPopupObject.open(res.link, res.name);
+        }
+      }, ".card-template")
+
+      cardsContainer.prepend(cardObject.render())
+      photoAddPopupObject.close();
     })
     .catch((err) => {
       console.log(err);
@@ -249,18 +281,13 @@ avatar.addEventListener("mouseout", () => {
 /* photoForm.addEventListener("submit", handlePhotoFormSubmit); */
 
 // Закрытие попапов крестиком или кликом по overlay
-/* popupList.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup_opened")) {
-      closePopup(popup);
-    }
-    if (evt.target.classList.contains("popup__close-btn")) {
-      closePopup(popup);
-    }
-  });
-}); */
+popupObjects.forEach((popup) => {
+  popup.setEventListeners()
+})
 
 // Live-validation
 enableValidation(config);
 
-export { myAccount };
+export {
+  myAccount
+}
