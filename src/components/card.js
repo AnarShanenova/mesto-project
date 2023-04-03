@@ -1,6 +1,4 @@
 import {myAccount} from '../index.js'
-/* import {putLike, removeLike, deleteCard} from './api.js' */
-
 
 export default class Card {
   constructor({ link, name, likes, owner, id, handleCardClick}, selector) {
@@ -79,8 +77,6 @@ export default class Card {
   // Метод, который возвращает полностью работоспособный 
   // и наполненный данными элемент карточки
   render() {
-    console.log("RENDER");
-
     const cardElement = this._getCard()
     const cardImg = cardElement.querySelector('.card__image');
     const cardTitle = cardElement.querySelector('.card__title');
