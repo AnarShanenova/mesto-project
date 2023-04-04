@@ -58,8 +58,6 @@ Promise.all([api.getUser(), api.getInitialCards()])
   userInfo.setUserInfo(users);
   cardsList.renderItems(cards);
   
-  const userInfo = new UserInfo({ userName, userJob, avatarPic });
-  
   const cardObject = new Card({
     link: card.link,
     name: card.name,
@@ -85,6 +83,7 @@ const cardsList = new Section({
 
 const bigImgPopupObject = new PopupWithImage(".popup_big-image");
 
+const userInfo = new UserInfo({ userName, userJob, avatarPic });
 // Редактирование профиля
 const profileEditForm = new PopupWithForm(nameEditPopupSelector, {
   handleSubmit: (data) => {
