@@ -1,4 +1,4 @@
-import {myAccount} from '../index.js'
+import {myAccount, api} from '../index.js'
 
 export default class Card {
   constructor({ link, name, likes, owner, id, handleCardClick}, selector) {
@@ -28,7 +28,7 @@ export default class Card {
     // Кнопка "Лайк"    
     likeButton.addEventListener('click', function(evt) {
       if (!evt.target.classList.contains('card__button-like_active')) {
-        putLike(id)
+        api.putLike(id)
           .then((res) => {
             likesNumber.textContent = res.likes.length;
             evt.target.classList.add('card__button-like_active');
@@ -37,7 +37,7 @@ export default class Card {
             console.log(err);
           });
       } else {
-        removeLike(id)
+        api.removeLike(id)
           .then((res) => {
             likesNumber.textContent = res.likes.length;
             evt.target.classList.remove('card__button-like_active');
@@ -47,9 +47,10 @@ export default class Card {
           });
       }
     });
+
     // Кнопка "Удалить фото-карточку"
     deleteButton.addEventListener('click', function (evt) {
-      deleteCard(id)
+      api.deleteCard(id)
       .then(() => {
         evt.target.closest('.card').remove(cardElement);
       })
@@ -57,6 +58,7 @@ export default class Card {
         console.log(err);
       })      
     });
+
     // Открытие фото в полный размер  
     cardImg.addEventListener('click',  handleCardClick);
   }
@@ -74,6 +76,7 @@ export default class Card {
       deleteButton.classList.add('card__button-delete_disabled');
     }
   }
+  
   // Метод, который возвращает полностью работоспособный 
   // и наполненный данными элемент карточки
   render() {

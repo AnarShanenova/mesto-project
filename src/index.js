@@ -1,8 +1,10 @@
 import './pages/index.css';
 import enableValidation from './components/FormValidator.js';
-import {renderLoading} from './components/utils.js';
 import Card from './components/Card.js';
-import Popup from './components/Popup.js';
+import Api from "./components/Api.js";
+import UserInfo from "./components/UserInfo";
+import Section from "./components/Section";
+import PopupWithForm from "./components/PopupWithForm";
 import PopupWithImage from './components/popupwithimage';
 import {
   nameEditBtn, 
@@ -11,31 +13,18 @@ import {
   userName, 
   userJob,  
   photoAddBtn,
-  photoForm,
-  nameEditForm,
   cardsContainer,
-  popupList,
-  photoSubmitBtn,
   avatar,
   avatarEditOverlay,
-  avatarEditForm,
   avatarPic,
-  linkInput,
-  photoTitleInput,
-  avatarInput,
   nameEditPopupSelector,
   addPhotoPopupSelector,
   avatarEditPopupSelector 
-} from "./components/constans.js";
-import Api from "./components/Api.js";
-import UserInfo from "./components/UserInfo";
-import Section from "./components/Section";
-import PopupWithForm from "./components/PopupWithForm";
-
+} from "./components/constants.js";
 
 let myAccount;
 
-const api = new Api({
+export const api = new Api({
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-20",
   headers: {
     authorization: "340a2beb-4d1b-4011-9455-07dbc10b8c56",
@@ -52,36 +41,35 @@ const config = {
   errorClass: "popup__input-error_active",
 };
 
+const cardsList = new Section({
+  renderer: (card) => {
+    const cardObject = new Card({
+      link: card.link,
+      name: card.name,
+      likes: card.likes,
+      owner: card.owner._id,
+      id: card._id,
+      handleCardClick: function () {    
+        bigImgPopupObject.open(card.link, card.name);
+      }
+    }, ".card-template")
+    cardsList.addItem(cardObject.render());
+  },
+}, cardsContainer);
+
 Promise.all([api.getUser(), api.getInitialCards()])
 .then(([users, cards]) => {
   myAccount = users._id;
   userInfo.setUserInfo(users);
   cardsList.renderItems(cards);
-  
-  const cardObject = new Card({
-    link: card.link,
-    name: card.name,
-    likes: card.likes,
-    owner: card.owner._id,
-    id: card._id,
-    handleCardClick: function () {    
-      bigImgPopupObject.open(card.link, card.name);
-    }
-  }, ".card-template")
-  
-  cardsContainer.prepend(cardObject.render())
 })    
 .catch((err) => {
   console.log(err);
 });
 
-const cardsList = new Section({
-  renderer: (data) => {
-    cardsList.setItem(createCard(data));
-  },
-}, cardsContainer);
-
+// Попап для картинки
 const bigImgPopupObject = new PopupWithImage(".popup_big-image");
+bigImgPopupObject.setEventListeners(); 
 
 const userInfo = new UserInfo({ userName, userJob, avatarPic });
 // Редактирование профиля
@@ -114,8 +102,19 @@ const addCardForm = new PopupWithForm(addPhotoPopupSelector, {
   handleSubmit: (data) => {
     addCardForm.renderLoading(true);
     api.addCard(data)
-    .then((data) => {
-      cardsList.setItem(createCard(data));
+    .then((card) => {
+      const cardObject = new Card({
+        link: card.link,
+        name: card.name,
+        likes: card.likes,
+        owner: card.owner._id,
+        id: card._id,
+        handleCardClick: function () {    
+          bigImgPopupObject.open(card.link, card.name);
+        }
+      }, ".card-template")
+
+      cardsList.addItem(cardObject.render());
       addCardForm.close()})
     .catch((err) => {
       console.log(err)})
