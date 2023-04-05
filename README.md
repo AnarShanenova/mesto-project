@@ -27,3 +27,5 @@
 
 [Посмотреть проект](https://anarshanenova.github.io/mesto-project/)
 
+ Ссылка на гитхаб моего напарника,[ Кравченко Анастасии](https://github.com/kravchenkoAnanas)
+
