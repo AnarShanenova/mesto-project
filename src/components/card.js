@@ -1,7 +1,10 @@
-import {myAccount, api} from '../index.js'
-
 export default class Card {
-  constructor({ link, name, likes, owner, id, handleCardClick}, selector) {
+  constructor(
+    { link, name, likes, owner, id, handleCardClick },
+    selector,
+    myAccount,
+    api
+  ) {
     this._selector = selector;
     this._link = link;
     this._name = name;
@@ -9,93 +12,109 @@ export default class Card {
     this._owner = owner;
     this._id = id;
     this._handleCardClick = handleCardClick;
+    this._myAccount = myAccount;
+    this._api = api;
   }
 
   _getCard() {
-    const cardElement = document
+    this._cardElement = document
       .querySelector(this._selector)
-      .content
-      .querySelector('.card')
+      .content.querySelector(".card")
       .cloneNode(true);
 
-    return cardElement;
+    return this._cardElement;
   }
 
-  _setEventListeners(likeButton, likesNumber, deleteButton, cardImg, cardElement) {
-    const id = this._id;
+  _setEventListeners() {    
     const handleCardClick = this._handleCardClick;
 
-    // Кнопка "Лайк"    
-    likeButton.addEventListener('click', function(evt) {
-      if (!evt.target.classList.contains('card__button-like_active')) {
-        api.putLike(id)
-          .then((res) => {
-            likesNumber.textContent = res.likes.length;
-            evt.target.classList.add('card__button-like_active');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        api.removeLike(id)
-          .then((res) => {
-            likesNumber.textContent = res.likes.length;
-            evt.target.classList.remove('card__button-like_active');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    });
+    // Кнопка "Лайк"
+    this._element
+      .querySelector(".card__button-like")
+      .addEventListener("click", () => {
+        this._handleLikeCard();
+      });
 
     // Кнопка "Удалить фото-карточку"
-    deleteButton.addEventListener('click', function (evt) {
-      api.deleteCard(id)
+    this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteCard();
+    });
+
+    // Открытие фото в полный размер
+    this._cardImg.addEventListener("click", handleCardClick);
+  }
+
+  _handleLikeCard() {
+    if (!this._likeButton.classList.contains("card__button-like_active")) {
+      this._api
+        .putLike(this._id)
+        .then((res) => {
+          this._likesNumber.textContent = res.likes.length;
+          this._likeButton.classList.add("card__button-like_active");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      this._api
+        .removeLike(this._id)
+        .then((res) => {
+          this._likesNumber.textContent = res.likes.length;
+          this._likeButton.classList.remove("card__button-like_active");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  _handleDeleteCard() {
+    this._api
+      .deleteCard(this._id)
       .then(() => {
-        evt.target.closest('.card').remove(cardElement);
+        this._element.remove();
       })
       .catch((err) => {
         console.log(err);
-      })      
-    });
-
-    // Открытие фото в полный размер  
-    cardImg.addEventListener('click',  handleCardClick);
+      });
   }
 
-  _isLikedByUser(likeButton) {
+    _isLikedByUser() {
     this._likes.forEach((user) => {
-      if (user._id === myAccount) {
-        likeButton.classList.add('card__button-like_active');
+      if (user._id === this._myAccount) {
+        this._likeButton.classList.add("card__button-like_active");
       }
-    }) 
+    });
   }
 
-  _deleteButtonDisable(deleteButton) {
-    if (this._owner !== myAccount) {
-      deleteButton.classList.add('card__button-delete_disabled');
+  _deleteButtonDisable() {
+    if (this._owner !== this._myAccount) {
+      this._deleteButton.classList.add("card__button-delete_disabled");
     }
   }
-  
-  // Метод, который возвращает полностью работоспособный 
+
+  // Метод, который возвращает полностью работоспособный
   // и наполненный данными элемент карточки
   render() {
-    const cardElement = this._getCard()
-    const cardImg = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const likeButton = cardElement.querySelector(".card__button-like");
-    const deleteButton = cardElement.querySelector(".card__button-delete");
-    const likesNumber = cardElement.querySelector('.card__like-number');
+    this._element = this._getCard();
+    this._cardImg = this._element.querySelector(".card__image");
+    this._cardTitle = this._element.querySelector(".card__title");
+    this._likeButton = this._element.querySelector(".card__button-like");
+    this._deleteButton = this._element.querySelector(".card__button-delete");
+    this._likesNumber = this._element.querySelector(".card__like-number");
 
-    cardImg.src = this._link;
-    cardTitle.textContent = this._name;
-    cardImg.alt = this._name;    
-    likesNumber.textContent = this._likes.length;
+    this._cardImg.src = this._link;
+    this._cardTitle.textContent = this._name;
+    this._cardImg.alt = this._name;
+    this._likesNumber.textContent = this._likes.length;
 
-    this._setEventListeners(likeButton, likesNumber, deleteButton, cardImg, cardElement);
-    this._isLikedByUser(likeButton);
-    this._deleteButtonDisable(deleteButton);
+   /*  if (this._likes.some((like) => like._id === this._owner)) {
+      this._likeButton.classList.add("card__button-like_active");
+    } */
 
-    return cardElement;
+    this._deleteButtonDisable();
+    this._isLikedByUser();
+    this._setEventListeners();
+    return this._element;
   }
 }
