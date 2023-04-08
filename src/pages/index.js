@@ -1,5 +1,5 @@
 import "./index.css";
-import enableValidation from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Api from "../components/Api.js";
 import UserInfo from "../components/UserInfo";
@@ -21,6 +21,9 @@ import {
   addPhotoPopupSelector,
   avatarEditPopupSelector,
   config,
+  nameEditForm,
+  photoForm,
+  avatarEditForm
 } from "../utils/constants.js";
 
 let myAccount;
@@ -32,6 +35,14 @@ export const api = new Api({
     "Content-Type": "application/json",
   },
 });
+
+const profileEditValidate = new FormValidator (config, nameEditForm);
+const editAvatarValidate = new FormValidator(config, photoForm);
+const addCardValidate = new FormValidator(config, avatarEditForm);
+
+profileEditValidate.enableValidation();
+editAvatarValidate.enableValidation();
+addCardValidate.enableValidation();
 
 const cardsList = new Section(
   {
@@ -166,4 +177,4 @@ avatar.addEventListener("mouseout", () => {
 });
 
 // Live-validation
-enableValidation(config);
+/* enableValidation(config); */
