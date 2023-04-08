@@ -23,7 +23,7 @@ import {
   config,
   nameEditForm,
   photoForm,
-  avatarEditForm
+  avatarEditForm,
 } from "../utils/constants.js";
 
 let myAccount;
@@ -36,7 +36,7 @@ export const api = new Api({
   },
 });
 
-const profileEditValidate = new FormValidator (config, nameEditForm);
+const profileEditValidate = new FormValidator(config, nameEditForm);
 const editAvatarValidate = new FormValidator(config, photoForm);
 const addCardValidate = new FormValidator(config, avatarEditForm);
 
@@ -175,6 +175,3 @@ avatar.addEventListener("mouseover", () => {
 avatar.addEventListener("mouseout", () => {
   avatarEditOverlay.classList.remove("profile__avatar-overlay_visible");
 });
-
-// Live-validation
-/* enableValidation(config); */
