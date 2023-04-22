@@ -23,7 +23,7 @@
 * JavaScript
 * Git
 * Webpack
-
+* ООП
 
 [Посмотреть проект](https://anarshanenova.github.io/mesto-project/)
 
